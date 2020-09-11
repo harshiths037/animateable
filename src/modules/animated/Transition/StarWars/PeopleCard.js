@@ -11,19 +11,19 @@ class PeopleCard extends React.Component {
     const {person, onCardPress, index, isAnimating, animating} = this.props;
     console.log('isAnimating', isAnimating);
     return (
-      <TouchableOpacity
-        onPress={() => {
-          if (this.cardRef) {
-            //Use ref callbacks to measure React component size
+      <View
+        // onPress={() => {
+        //   if (this.cardRef) {
+        //     //Use ref callbacks to measure React component size
 
-            this.cardRef.measure((x, y, width, height, pageX, pageY) => {
-              const layout = {x: pageX, y: pageY, width, height};
-              if (onCardPress) {
-                onCardPress({person, index, layout});
-              }
-            });
-          }
-        }}
+        //     this.cardRef.measure((x, y, width, height, pageX, pageY) => {
+        //       const layout = {x: pageX, y: pageY, width, height};
+        //       if (onCardPress) {
+        //         onCardPress({person, index, layout});
+        //       }
+        //     });
+        //   }
+        // }}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-evenly',
@@ -55,7 +55,7 @@ class PeopleCard extends React.Component {
           }}>
           <Text style={{fontSize: normalize(20)}}>{person.name}</Text>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }

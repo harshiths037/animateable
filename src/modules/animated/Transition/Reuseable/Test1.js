@@ -3,14 +3,16 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import CustomAnimatedFlatlist from './CustomAnimatedFlatlist';
 import people from '../StarWars/Data/people';
-import PeopleCard from '../StarWars/PeopleCard';
+import PeopleCard, {windowHeight, windowWidth} from '../StarWars/PeopleCard';
 import HeaderComponent from '../StarWars/HeaderComponent';
+import {normalize} from '../../../../utils/Responsive';
 
 class Test1 extends Component {
   render() {
     return (
       <View style={styles.container}>
         <CustomAnimatedFlatlist
+          style={{}}
           header={
             <HeaderComponent
               url={require('../StarWars/Data/assets/starWarsLogo.jpg')}

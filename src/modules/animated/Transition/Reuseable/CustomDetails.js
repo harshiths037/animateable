@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Animated, StyleSheet, Text} from 'react-native';
-import PeopleCard, {windowWidth} from './PeopleCard';
 import {normalize} from '../../../../utils/Responsive';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {windowWidth} from './CardComponent';
 
 function getSharedElementOpacityStyle(animatedValue) {
   const opacityInterpolation = animatedValue.interpolate({
@@ -15,7 +15,7 @@ function getSharedElementOpacityStyle(animatedValue) {
     paddingHorizontal: 0,
   };
 }
-const PeopleDetails = ({
+const CustomDetails = ({
   index,
   data,
   onCardPress,
@@ -25,23 +25,6 @@ const PeopleDetails = ({
   const transitionLayerStyle = getSharedElementOpacityStyle(animatedValue);
   return (
     <>
-      <Animated.View style={[{flex: 1}, transitionLayerStyle]}>
-        <View style={{flex: 1}}>
-          <View style={{flex: 1}}>
-            <PeopleCard
-              index={index}
-              person={data}
-              isAnimating={isAnimating}
-              animating={animatedValue}
-              onCardPress={() => {
-                if (onCardPress) {
-                  onCardPress();
-                }
-              }}
-            />
-          </View>
-        </View>
-      </Animated.View>
       <Animated.View
         style={{
           flex: 4,
@@ -137,4 +120,4 @@ const styles = StyleSheet.create({
   },
   detailFont: {fontSize: normalize(20), color: '#ffe81f'},
 });
-export default PeopleDetails;
+export default CustomDetails;
