@@ -11,22 +11,12 @@ import { SharedElementRenderer } from 'react-native-motion';
 import Instagram from './modules/panResponder/instagram';
 import PanresponderRedBall from './modules/panResponder/panresponderRedBall';
 import PanresponderRedBallHARD from './modules/panResponder/panresponderRedBallHARD';
+import Values from './modules/Reanimated/Values';
 
 console.disableYellowBox = true;
 const AppSrc = () => {
-    // return <Opacity />;rt
-    // return <FadeInView />;
-    // return <TranslatePositons />;
-    // return <Header />;
-    // return <HeaderProfile />;
-    // return <StarWars />;
-    // return <Test1 />;
-    return <Insgtagram / > ;
-    // return <PanresponderRedBallHARD />;
-    // return (
-    //   <SharedElementRenderer>
-    //     <PaymentSync />
-    //   </SharedElementRenderer>
-    // );
+
+    return <Values /> ;
+    
 };
 export default AppSrc;

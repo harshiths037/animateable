@@ -40,10 +40,10 @@ class CustomAnimatedFlatlist extends React.Component {
 
     reverseAnimation = () => {
         this.setState({
-                startTransition: true,
-                transitionCompleted: false,
-                isAnimating: true,
-            },
+            startTransition: true,
+            transitionCompleted: false,
+            isAnimating: true,
+        },
             () => {
                 Animated.timing(this.state.animatedValue, {
                     toValue: 0,
@@ -80,13 +80,13 @@ class CustomAnimatedFlatlist extends React.Component {
     getLayout = (item, index, layout) => {
         this.state.animatedValue.setValue(0); //set animationValue back to zero
         this.setState({
-                startTransition: true,
-                selectedIndex: index,
-                selectedViewLayoutParam: layout,
-                transitionCompleted: false,
-                isAnimating: true,
-                shouldShowInfo: true,
-            },
+            startTransition: true,
+            selectedIndex: index,
+            selectedViewLayoutParam: layout,
+            transitionCompleted: false,
+            isAnimating: true,
+            shouldShowInfo: true,
+        },
             () => {
                 this.startAnimation();
             },
@@ -132,121 +132,106 @@ class CustomAnimatedFlatlist extends React.Component {
         // });
         const { data, header, style, component } = this.props;
         const transitionLayerCardStyle = this.getTransitionCardStyle();
-        return ( <
-            View style = {
-                {
-                    flex: 1,
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'black',
-                }
-            } >
-            <
-            Animated.View style = {
-                {
-                    opacity: animatedValue.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [1, 0],
-                        extrapolate: 'clamp',
-                    }),
-                }
-            } >
-            <
-            FlatList data = { data }
-            ItemSeparatorComponent = {
-                () => ( <
-                    View style = {
-                        { margin: normalize(10) } }
-                    />
-                )
-            }
-            ListHeaderComponent = {
-                header ?
-                React.cloneElement(header, {
-                        style: {
-                            transform: [{
-                                scale: animatedValue.interpolate({
-                                    inputRange: [0, 1],
-                                    outputRange: [1, 0],
-                                    extrapolate: 'clamp',
-                                }),
-                            }],
-                        ],
-                    },
-                }): () => < View style = {
-                { margin: normalize(10) } }
-            />
-        }
-        renderItem = {
-            ({ item, index }) => ( <
-                Animated.View style = {
+        return (<View 
+            style={{
+                flex: 1,
+                alignSelf: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'black',
+            }}>
+            <Animated.View style={
                     {
                         opacity: animatedValue.interpolate({
-                            inputRange: [0, TRANSITION_VALUE, 1],
-                            outputRange: [1, 0, 0],
+                            inputRange: [0, 1],
+                            outputRange: [1, 0],
                             extrapolate: 'clamp',
                         }),
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                    }}>
+                <FlatList data={data}
+                    ItemSeparatorComponent={
+                        () => (<View style={
+                                { margin: normalize(10) }}
+                        />
+                        )
                     }
-                } >
-                <
-                CardComponent index = { index }
-                component = { component }
-                onCardPress = { this.getLayout }
-                person = { item }
-                />{' '} <
-                /Animated.View>
+                    ListHeaderComponent={
+                        header ?
+                            React.cloneElement(header, {
+                                style: {
+                                    transform: [{
+                                        scale: animatedValue.interpolate({
+                                            inputRange: [0, 1],
+                                            outputRange: [1, 0],
+                                            extrapolate: 'clamp',
+                                        }),
+                                    }],
+                        },}): () => <View style={
+                    { margin: normalize(10) }}
+                />
+        }
+        renderItem = {
+                    ({ item, index }) => (<Animated.View style={
+                            {
+                                opacity: animatedValue.interpolate({
+                                    inputRange: [0, TRANSITION_VALUE, 1],
+                                    outputRange: [1, 0, 0],
+                                    extrapolate: 'clamp',
+                                }),
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }
+                        } >
+                        <CardComponent index={index}
+                            component={component}
+                            onCardPress={this.getLayout}
+                            person={item}
+                        />
+                        </Animated.View>
             )
         }
-        />{' '} <
-        /Animated.View>{' '} { /*//////////////////////////////////////////////////////////////////*/ } {
-            shouldShowInfo && ( <
-                >
-                <
-                Animated.View style = {
-                    {
-                        position: 'absolute',
-                        top: normalize(50),
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'black',
-                        opacity: animatedValue.interpolate({
-                            inputRange: [0, TRANSITION_VALUE, 1 - TRANSITION_VALUE, 1],
-                            outputRange: [0, 0, 1, 1],
-                            // extrapolate: 'clamp',
-                        }),
-                    }
-                } >
-                <
-                CardComponent index = { selectedIndex }
-                component = { component }
-                onCardPress = { this.reverseAnimation }
-                person = { data[selectedIndex] }
-                />{' '} <
-                CustomDetails index = { 0 }
-                data = { data[selectedIndex] }
-                animatedValue = { animatedValue }
-                // isAnimating={isAnimating}
-                // onCardPress={this.reverseAnimation}
-                />{' '} <
-                /Animated.View>{' '} <
-                />
+        />
+        </Animated.View>
+        {shouldShowInfo && (<Animated.View style={
+                                        {
+                                            position: 'absolute',
+                                            top: normalize(50),
+                                            left: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            backgroundColor: 'black',
+                                            opacity: animatedValue.interpolate({
+                                                inputRange: [0, TRANSITION_VALUE, 1 - TRANSITION_VALUE, 1],
+                                                outputRange: [0, 0, 1, 1],
+                                                // extrapolate: 'clamp',
+                                            }),
+                                        }
+                                    } >
+                                    <CardComponent index={selectedIndex}
+                                        component={component}
+                                        onCardPress={this.reverseAnimation}
+                                        person={data[selectedIndex]}
+                                    /><CustomDetails index={0}
+                                        data={data[selectedIndex]}
+                                        animatedValue={animatedValue}
+                                    // isAnimating={isAnimating}
+                                    // onCardPress={this.reverseAnimation}
+                                    />
+                                    </Animated.View>
+                                    // </>
             )
-        } { /* //transsition layer */ } { ' ' } {
-            startTransition && !transitionCompleted && ( <
-                Animated.View style = {
-                    {...transitionLayerCardStyle } } >
-                <
-                CardComponent index = { selectedIndex }
-                component = { component }
-                person = { data[selectedIndex] }
-                />{' '} <
-                /Animated.View>
+        } { /* //transsition layer */} 
+        {
+                                        startTransition && !transitionCompleted && (
+                                            <Animated.View style={
+                                                { ...transitionLayerCardStyle }} >
+                                            <CardComponent index={selectedIndex}
+                                                component={component}
+                                                person={data[selectedIndex]}
+                                            />
+                                            </Animated.View>
             )
-        } { ' ' } <
-        /View>
+        } 
+        </View>
     );
 }
 }
